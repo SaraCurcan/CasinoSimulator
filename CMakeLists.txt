@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 4.1)
 project(Casino)
+
 set(CMAKE_CXX_STANDARD 20)
-include_directories(include)
-file(GLOB_RECURSE SOURCES "src/*.cpp" "main.cpp")
-add_executable(Casino ${SOURCES})
+
+add_executable(Casino
+        main.cpp
+        Game.h
+        Game.cpp
+        Slots.h
+        Slots.cpp
+        main.cpp
+)
