@@ -16,6 +16,6 @@ public:
     Slots(const Slots& obj);
     Slots& operator=(const Slots& obj);
     virtual ~Slots();
-    void play(double& price) override;
+    void play(Player& player) override;
     void printRules() const override;
 };

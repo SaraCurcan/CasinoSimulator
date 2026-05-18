@@ -10,4 +10,6 @@ add_executable(Casino
         Slots.h
         Slots.cpp
         main.cpp
+        Player.h
+        Player.cpp
 )

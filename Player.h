@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-class Payer {
+class Player {
 private:
     std::string name;
     double balance;
@@ -11,7 +11,7 @@ public:
     Player& operator=(const Player& obj);
     ~Player();
     std::string getName() const;
-    void setName(std::string& name);
+    void setName(const std::string& name);
     double getBalance() const;
     void setBalance(double balance);
 };

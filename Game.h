@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<string>
+class Player;
 class Game {
 protected:
     std::string game;
@@ -11,7 +12,7 @@ public:
     Game(const Game& obj);
     Game& operator=(const Game& obj);
     virtual ~Game();
-    virtual void play(double& price)=0;
+    virtual void play(Player& player)=0;
     virtual void printRules() const=0;
     virtual double calculatePrize(double bet, double odds) const;
     void validate(double currentBet, double balance) const;
