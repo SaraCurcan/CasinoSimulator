@@ -12,4 +12,5 @@ add_executable(Casino
         main.cpp
         Player.h
         Player.cpp
+        Blackjack.h
 )

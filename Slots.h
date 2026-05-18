@@ -13,7 +13,6 @@ private:
     std::vector<std::vector<std::string>> screen() const;
     void printScreen(const std::vector<std::vector<std::string>> &screen) const;
     bool checkLine(const std::vector<std::vector<std::string>> &screen, std::string& winningSymbols) const;
-    double validBet() const;
     double multiply(const std::string& symbol) const;
 public:
     Slots();

@@ -55,18 +55,7 @@ bool Slots::checkLine(const std::vector<std::vector<std::string> > &screen, std:
     }
     return true;
 }
-double  Slots::validBet() const {
-    double bet;
-    std::cin>>bet;
-    if (std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
-        throw std::runtime_error("Invalid input! PLease enter a valid number\n");
-
-    }
-    return bet;
-}
 double Slots::multiply(const std::string& symbol) const {
     if (symbol=="777") return 20.0;
     if (symbol=="BAR") return 10.0;

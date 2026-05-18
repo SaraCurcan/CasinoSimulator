@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
-
+#include <limits>
 Game::Game():game("N/A"), minBet(0.0){}
 Game::Game(std::string game, double minBet):game(game), minBet(minBet){}
 Game::Game(const Game& obj) : game(obj.game), minBet(obj.minBet){}
@@ -28,4 +28,16 @@ std::string Game::getName() const {
 }
 double Game::getMinBet() const {
     return minBet;
+}
+double  Game::validBet() const {
+    double bet;
+    std::cin>>bet;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+
+        throw std::runtime_error("Invalid input! PLease enter a valid number\n");
+
+    }
+    return bet;
 }

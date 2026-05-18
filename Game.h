@@ -6,6 +6,7 @@ class Game {
 protected:
     std::string game;
     double minBet;
+    double validBet() const;
 public:
     Game();
     Game(std::string game, double minBet);
