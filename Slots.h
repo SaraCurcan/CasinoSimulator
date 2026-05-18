@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.h"
+#include "Player.h"
 #include<iostream>
 #include<vector>
 #include<string>
@@ -10,6 +11,10 @@ private:
     int rows;
     int columns;
     std::vector<std::vector<std::string>> screen() const;
+    void printScreen(const std::vector<std::vector<std::string>> &screen) const;
+    bool checkLine(const std::vector<std::vector<std::string>> &screen, std::string& winningSymbols) const;
+    double validBet() const;
+    double multiply(const std::string& symbol) const;
 public:
     Slots();
     Slots(std::string game, double minBet,int rows,int columns);

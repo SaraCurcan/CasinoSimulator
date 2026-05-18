@@ -1,0 +1,11 @@
+=================================================
+           RULES FOR SLOTS
+=================================================
+1. Set your bet equal or above the minimum bet.
+2. Spin to get identical symbols on the middle row!
+3. Payouts (3 of a kind):
+   - [777]             -> 20x your bet (JACKPOT)
+   - [BAR]             -> 10x your bet
+   - [PLUM / ORANGE]   -> 5x your bet
+   - [CHERRY / LEMON]  -> 3x your bet
+================================================
