@@ -35,3 +35,7 @@ void Player::setBalance(double balance){
         this->balance=0.0;
     }
 }
+std::ostream& operator<<(std::ostream& out, const Player& player) {
+    out<<"Player: "<<player.name<<" | Balance: $"<<player.balance<<"\n";
+    return out;
+}
