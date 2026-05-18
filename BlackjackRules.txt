@@ -1,0 +1,11 @@
+===========================================================
+                 RULES FOR BLACKJACK
+===========================================================
+
+1.The goal is to beat the dealer's hand without exceeding 21.
+2.Face cards (J, Q, K) are worth 10 points.
+3.Aces can count as 1 or 11 points, depending on your total.
+4.You can choose to 'Hit' (draw a card) or 'Stand' (stop).
+5.Dealer must hit until their cards total 17 or higher.
+6.If you exceed 21, you 'Bust' and lose instantly.
+7.A 'Push' occurs if totals match; your bet is returned.
