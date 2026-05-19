@@ -19,7 +19,7 @@ public:
     Slots(std::string game, double minBet,int rows,int columns);
     Slots(const Slots& obj);
     Slots& operator=(const Slots& obj);
-    virtual ~Slots();
+   ~Slots() override;
     void play(Player& player) override;
     void printRules() const override;
 };
