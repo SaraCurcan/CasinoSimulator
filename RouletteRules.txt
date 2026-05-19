@@ -1,0 +1,42 @@
+===================================================================
+                       ROULETTE GAME RULES
+===================================================================
+
+Roulette is a classic casino game played with a wheel containing
+37 numbered slots (0 to 36). The slots are colored as follows:
+ - Number 0: Green (gives the House its mathematical edge)
+ - Numbers 1-10 and 19-28: Odd numbers are RED, Even numbers are BLACK
+ - Numbers 11-18 and 29-36: Even numbers are RED, Odd numbers are BLACK
+
+-------------------------------------------------------------------
+AVAILABLE BET TYPES & PAYOUTS
+-------------------------------------------------------------------
+
+1. SPECIFIC NUMBER (Straight Up Bet)
+   - You place your bet on any single number from 0 to 36.
+   - If the ball lands on your exact number, you win!
+   - Payout: 35x your original bet.
+
+2. COLOR (Red / Black Bet)
+   - You choose whether the winning number will be Red or Black.
+   - If the ball lands on 0 (Green), all Color bets lose.
+   - Payout: 2x your original bet (Even money).
+
+3. EVEN / ODD (Parity Bet)
+   - You choose whether the winning number will be Even or Odd.
+   - If the ball lands on 0 (Green), the House wins automatically,
+     and all Even/Odd bets lose.
+   - Payout: 2x your original bet (Even money).
+
+-------------------------------------------------------------------
+                            HOW TO PLAY
+-------------------------------------------------------------------
+1. Enter your bet amount (Must be equal to or higher than the minimum).
+2. Choose your preferred bet type from the menu.
+3. Enter your prediction based on the chosen bet type.
+4. The dealer spins the wheel and drops the ball.
+5. If your prediction matches the winning slot, your prize is
+   calculated and added to your balance. Otherwise, the bet is lost.
+
+                        Good luck at the table!
+===================================================================

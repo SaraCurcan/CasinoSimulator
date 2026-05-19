@@ -2,7 +2,7 @@
 #include <iostream>
 #include <random>
 #include<string>
-#include <limits>
+#include <fstream>
 #include <limits>
 
 Roulette::Roulette():Game("Roulette", 10.0) {
@@ -60,3 +60,135 @@ Roulette& Roulette::operator=(const Roulette& obj) {
     return *this;
 }
 Roulette::~Roulette() {};
+
+number Roulette::spinWheel() const {
+    int random=rand()%37;
+    return wheel[random];
+}
+
+void Roulette::numberBet(double bet, Player &player, const number winningSlot) {
+    int guessed=-1;
+    std::string input;
+    std::cout<<"Enter a number to bet on (0-36)\n";
+    while (true) {
+        std::getline(std::cin, input);
+        try {
+            guessed=std::stoi(input);
+            if (guessed>=0 && guessed<37) break;
+        } catch (...){}
+        std::cout<<"Invalid input! Enter a number to bet on (0-36)\n";
+    }
+    std::cout<<"SPINNING THE WHEEL\n";
+    std::cout<<"The ball landed on: "<<winningSlot.color<<" "<<winningSlot.value<<"\n";
+    if (guessed==winningSlot.value) {
+        double prize=calculatePrize(bet,35.0);
+        player.setBalance(player.getBalance()+prize);
+        std::cout<<"HIT ! YOU WON $"<<prize<<"\n";
+    }else {
+        std::cout<<"LOSER ! BETTER LUCK NEXT TIME\n";
+    }
+}
+
+void Roulette::color(double bet, Player &player, const number winningSlot) {
+    std::string input;
+    int colorChoice=0;
+    std::cout<<"Choose a color: 1.RED | 2.BLACK\n";
+    while (true) {
+        std::getline(std::cin, input);
+        try {
+            colorChoice=std::stoi(input);
+            if (colorChoice==1 || colorChoice==2) break;
+        }catch (...){}
+        std::cout<<"Press 1 for RED or 2 for BLACK\n";
+    }
+    std::string chosenColor;
+    if (colorChoice==1) {
+        chosenColor="Red";
+    }else { chosenColor="Black"; }
+    std::cout<<"SPINNING THE WHEEL\n";
+    std::cout<<"The ball landed on: "<<winningSlot.color<<" "<<winningSlot.value<<"\n";
+    if (chosenColor==winningSlot.color) {
+        double prize=calculatePrize(bet,2.0);
+        player.setBalance(player.getBalance()+prize);
+        std::cout<<"Correct ! YOU WON $"<<prize<<"\n";
+    }else {
+        std::cout<<"Wrong color!You lost!\n";
+    }
+}
+
+void Roulette::evenOdd(double bet, Player &player, const number winningSlot) {
+    if (winningSlot.value==0) {
+        std::cout<<"0 !!!. Houes wins\n";
+        return;
+    }
+    std::string input;
+    int choice=0;
+    std::cout<<"Choose: 1.EVEN | 2.ODD\n";
+    while(true) {
+        std::getline(std::cin,input);
+        try{
+            choice=std::stoi(input);
+            if (choice==1 || choice==2) break;
+        }catch(...) {}
+        std::cout<<"Choose: 1.EVEN | 2.ODD\n";
+    }
+    bool isEven=(winningSlot.value%2==0);
+    std::cout<<"SPINNING THE WHEEL\n";
+    std::cout<<"The ball landed on: "<<winningSlot.color<<" "<<winningSlot.value<<"\n";
+    if (choice==1) {
+        if (isEven) {
+            double prize=calculatePrize(bet,2.0);
+            player.setBalance(player.getBalance()+prize);
+            std::cout<<"Correct ! YOU WON $"<<prize<<"\n";
+        } else std::cout<<"Wrong parity !You lost! \n";}
+        else if (choice==  2) {
+            if (!isEven) {
+                double prize=calculatePrize(bet,2.0);
+                player.setBalance(player.getBalance()+prize);
+                std::cout<<"Correct ! YOU WON $"<<prize<<"\n";
+            } else std::cout<<"Wrong parity !You lost! \n";}
+}
+
+void Roulette::betType(int choice, double bet, Player &player, const number winningSlot) {
+    if (choice==1)
+        numberBet(bet,player,winningSlot);
+    else if (choice==2)
+        color(bet,player,winningSlot);
+    else if (choice==3)
+        evenOdd(bet,player,winningSlot);
+}
+
+void Roulette::play(Player& player) {
+    std::cout << "\n=========================================\n";
+    std::cout << "          WELCOME TO ROULETTE          \n";
+    std::cout << "=========================================\n";
+    std::cout << "Enter your bet (Min: " << getMinBet() << "$):\n";
+    double bet = validBet();
+    player.placeBet(bet,getMinBet());
+    std::cout<<"Choose bet type: \n 1.EXACT NUMBER \n 2.CCOLOR (Red/Black) \n 3. EVEN/ODD\n";
+    std::string input;
+    int choice=0;
+    while (true) {
+        std::getline(std::cin,input);
+        try {
+            choice=std::stoi(input);
+            if (choice==1 || choice==2 || choice==3) break;
+        }catch (...){}
+        std::cout<<"Enter 1,2 or 3\n";
+    }
+    number winningSlot=spinWheel();
+    betType(choice,bet,player,winningSlot);
+}
+
+void Roulette::printRules() const {
+    std::ifstream file("RouletteRules.txt");
+    if (!file.is_open()) {
+        std::cout<<"Place your bets on numbers, colors, or parity! Good luck!\n";
+        return;
+    }
+    std::string line;
+    while (std::getline(file,line)) {
+        std::cout<<line<<"\n";
+    }
+    file.close();
+}

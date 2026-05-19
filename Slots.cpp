@@ -39,7 +39,7 @@ void Slots::printScreen(const std::vector<std::vector<std::string>> &screen) con
     for (int i=0;i<rows;i++) {
         std::cout<<"| ";
         for (int j=0;j<columns;++j) {
-            std::cout<<screen[i][j]<<" | \n";
+            std::cout<<screen[i][j]<<" | ";
         }
         std::cout<<std::endl;
     }
