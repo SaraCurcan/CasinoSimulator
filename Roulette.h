@@ -23,7 +23,7 @@ public:
     Roulette(std::string game, double bet);
     Roulette(const Roulette& obj);
     Roulette& operator=(const Roulette& obj);
-    ~Roulette() override {};
+    ~Roulette() override;
     void play(Player& player) override;
     void printRules() const override;
 
