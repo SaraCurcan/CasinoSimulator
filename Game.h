@@ -7,6 +7,7 @@ protected:
     std::string game;
     double minBet;
     double validBet() const;
+    double handleBetting(Player& player);
 public:
     Game();
     Game(std::string game, double minBet);

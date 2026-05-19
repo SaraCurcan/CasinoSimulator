@@ -117,10 +117,6 @@ void Roulette::color(double bet, Player &player, const number winningSlot) {
 }
 
 void Roulette::evenOdd(double bet, Player &player, const number winningSlot) {
-    if (winningSlot.value==0) {
-        std::cout<<"0 !!!. Houes wins\n";
-        return;
-    }
     std::string input;
     int choice=0;
     std::cout<<"Choose: 1.EVEN | 2.ODD\n";
@@ -132,9 +128,13 @@ void Roulette::evenOdd(double bet, Player &player, const number winningSlot) {
         }catch(...) {}
         std::cout<<"Choose: 1.EVEN | 2.ODD\n";
     }
-    bool isEven=(winningSlot.value%2==0);
     std::cout<<"SPINNING THE WHEEL\n";
     std::cout<<"The ball landed on: "<<winningSlot.color<<" "<<winningSlot.value<<"\n";
+    if (winningSlot.value==0) {
+        std::cout<<"0 !!!. Houes wins\n";
+        return;
+    }
+    bool isEven=(winningSlot.value%2==0);
     if (choice==1) {
         if (isEven) {
             double prize=calculatePrize(bet,2.0);
@@ -162,9 +162,7 @@ void Roulette::play(Player& player) {
     std::cout << "\n=========================================\n";
     std::cout << "          WELCOME TO ROULETTE          \n";
     std::cout << "=========================================\n";
-    std::cout << "Enter your bet (Min: " << getMinBet() << "$):\n";
-    double bet = validBet();
-    player.placeBet(bet,getMinBet());
+    double bet=handleBetting(player);
     std::cout<<"Choose bet type: \n 1.EXACT NUMBER \n 2.CCOLOR (Red/Black) \n 3. EVEN/ODD\n";
     std::string input;
     int choice=0;

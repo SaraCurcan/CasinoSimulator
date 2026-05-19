@@ -65,9 +65,7 @@ double Slots::multiply(const std::string& symbol) const {
 }
 void Slots::play(Player& player) {
     std::cout<<"===== SPINNING THE REELS IN "<<getName()<<" =====\n";
-    std::cout<<"Enter your bet (Min: "<<getMinBet()<<" )\n";
-    double bet=validBet();
-    player.placeBet(bet,getMinBet());
+    double bet=handleBetting(player);
     std::vector<std::vector<std::string>> actualScreen=screen();
     std::cout<<"-----SCREEN-----\n";
     printScreen(actualScreen);

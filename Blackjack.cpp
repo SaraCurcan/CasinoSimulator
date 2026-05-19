@@ -114,9 +114,7 @@ void Blackjack::play(Player &player) {
     std::cout << "\n=========================================\n";
     std::cout << "          WELCOME TO BLACKJACK           \n";
     std::cout << "=========================================\n";
-    std::cout << "Enter your bet (Min: " << getMinBet() << "$):\n";
-    double bet = validBet();
-    player.placeBet(bet, getMinBet());
+    double bet = handleBetting(player);
     shuffleDeck();
     std::vector<std::string> playerHand={deck[0],deck[1]};
     std::vector<std::string> dealerHand={deck[2],deck[3]};

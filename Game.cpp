@@ -3,6 +3,8 @@
 #include <string>
 #include <stdexcept>
 #include <limits>
+
+#include "Player.h"
 Game::Game():game("N/A"), minBet(0.0){}
 Game::Game(std::string game, double minBet):game(game), minBet(minBet){}
 Game::Game(const Game& obj) : game(obj.game), minBet(obj.minBet){}
@@ -38,6 +40,21 @@ double  Game::validBet() const {
 
         throw std::runtime_error("Invalid input! PLease enter a valid number\n");
 
+    }
+    return bet;
+}
+
+double Game::handleBetting(Player &player) {
+    double bet=0;
+    while (true) {
+    try {
+        std::cout << "Enter your bet (Min: " << minBet << "$):\n";
+        bet = validBet();
+        player.placeBet(bet,minBet);
+        break;
+    } catch (const std::runtime_error& e) {
+        std::cout<<"WARNING "<<e.what()<<" You only have $ "<<player.getBalance()<<" . Try again \n";
+    }
     }
     return bet;
 }
