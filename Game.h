@@ -1,6 +1,8 @@
 #pragma once
 #include<iostream>
 #include<string>
+#include "CasinoHistory.h"
+
 class Player;
 class Game {
 protected:
@@ -14,7 +16,7 @@ public:
     Game(const Game& obj);
     Game& operator=(const Game& obj);
     virtual ~Game();
-    virtual void play(Player& player)=0;
+    virtual void play(Player& player, CasinoHistory<Transaction>& log)=0;
     virtual void printRules() const=0;
     virtual double calculatePrize(double bet, double odds) const;
     void validate(double currentBet, double balance) const;

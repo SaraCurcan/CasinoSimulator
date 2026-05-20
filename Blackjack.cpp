@@ -95,22 +95,25 @@ void Blackjack::playerRound(std::vector<std::string> &playerHand, int &deckIndex
 
 }
 
-void Blackjack::winner(Player &player, double bet, int playerTotal, int dealerTotal) {
+void Blackjack::winner(Player &player, double bet, int playerTotal, int dealerTotal,CasinoHistory<Transaction>& log) {
     if (dealerTotal>21 || playerTotal>dealerTotal) {
         double prize=calculatePrize(bet,2.0);
         player.setBalance(player.getBalance() + prize);
         std::cout<<"You won $"<<prize<<"\n";
+        log.addEvvent({game,bet,prize});
     }
     else if (playerTotal<dealerTotal) {
         std::cout<<"You lost! Better luck next time!\n";
+        log.addEvvent({game,bet,0.0});
     }
     else {
         player.setBalance(player.getBalance() + bet);
         std::cout << "It's a Push! Your bet of $" << bet << " was returned.\n";
+        log.addEvvent({game,bet,bet});
     }
 }
 
-void Blackjack::play(Player &player) {
+void Blackjack::play(Player &player,CasinoHistory<Transaction>& log) {
     std::cout << "\n=========================================\n";
     std::cout << "          WELCOME TO BLACKJACK           \n";
     std::cout << "=========================================\n";
@@ -125,6 +128,7 @@ void Blackjack::play(Player &player) {
     int playerTotal=handValue(playerHand);
     if (playerTotal>21) {
         std::cout << "\n❌ Bust! You went over 21. Dealer wins!\n";
+        log.addEvvent({game,bet,0.0});
         return;
     }
     std::cout<<"Dealer's turn\n";
@@ -134,7 +138,7 @@ void Blackjack::play(Player &player) {
         dealerHand.push_back(deck[deckIndex++]);
         showHand("Dealer", dealerHand,false);
     }
-    winner(player,bet,playerTotal,handValue(dealerHand));
+    winner(player,bet,playerTotal,handValue(dealerHand), log);
 }
 
 void Blackjack::printRules() const {

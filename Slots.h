@@ -20,6 +20,6 @@ public:
     Slots(const Slots& obj);
     Slots& operator=(const Slots& obj);
    ~Slots() override;
-    void play(Player& player) override;
+    void play(Player& player, CasinoHistory<Transaction>& log) override;
     void printRules() const override;
 };

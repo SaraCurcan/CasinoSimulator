@@ -11,7 +11,7 @@ private:
     int handValue(const std::vector<std::string>& hand) const;
     int cardValue(const std::string& card) const;
     void showHand(const std::string& owner, const std::vector<std::string>& hand, bool hideCard=false) const;
-    void winner(Player& player, double bet,int playertotal,int dealerTotal);
+    void winner(Player& player, double bet,int playertotal,int dealerTotal,CasinoHistory<Transaction>& log);
     void playerRound(std::vector<std::string>& playerHand, int& deckIndex,const std::string& playerName);
 public:
     Blackjack();
@@ -20,6 +20,6 @@ public:
     Blackjack& operator=(const Blackjack& obj);
     ~Blackjack() override;
 
-    void play(Player& player) override;
+    void play(Player& player, CasinoHistory<Transaction>& log) override;
     void printRules() const override;
 };

@@ -66,7 +66,7 @@ number Roulette::spinWheel() const {
     return wheel[random];
 }
 
-void Roulette::numberBet(double bet, Player &player, const number winningSlot) {
+void Roulette::numberBet(double bet, Player &player, const number winningSlot,CasinoHistory<Transaction>& log) {
     int guessed=-1;
     std::string input;
     std::cout<<"Enter a number to bet on (0-36)\n";
@@ -84,12 +84,14 @@ void Roulette::numberBet(double bet, Player &player, const number winningSlot) {
         double prize=calculatePrize(bet,35.0);
         player.setBalance(player.getBalance()+prize);
         std::cout<<"HIT ! YOU WON $"<<prize<<"\n";
+        log.addEvvent({game, bet, prize});
     }else {
         std::cout<<"LOSER ! BETTER LUCK NEXT TIME\n";
+        log.addEvvent({game, bet, 0.0});
     }
 }
 
-void Roulette::color(double bet, Player &player, const number winningSlot) {
+void Roulette::color(double bet, Player &player, const number winningSlot,CasinoHistory<Transaction>& log) {
     std::string input;
     int colorChoice=0;
     std::cout<<"Choose a color: 1.RED | 2.BLACK\n";
@@ -111,12 +113,14 @@ void Roulette::color(double bet, Player &player, const number winningSlot) {
         double prize=calculatePrize(bet,2.0);
         player.setBalance(player.getBalance()+prize);
         std::cout<<"Correct ! YOU WON $"<<prize<<"\n";
+        log.addEvvent({game, bet, prize});
     }else {
         std::cout<<"Wrong color!You lost!\n";
+        log.addEvvent({game, bet, 0.0});
     }
 }
 
-void Roulette::evenOdd(double bet, Player &player, const number winningSlot) {
+void Roulette::evenOdd(double bet, Player &player, const number winningSlot,CasinoHistory<Transaction>& log) {
     std::string input;
     int choice=0;
     std::cout<<"Choose: 1.EVEN | 2.ODD\n";
@@ -132,6 +136,7 @@ void Roulette::evenOdd(double bet, Player &player, const number winningSlot) {
     std::cout<<"The ball landed on: "<<winningSlot.color<<" "<<winningSlot.value<<"\n";
     if (winningSlot.value==0) {
         std::cout<<"0 !!!. Houes wins\n";
+        log.addEvvent({game, bet, 0.0});
         return;
     }
     bool isEven=(winningSlot.value%2==0);
@@ -140,25 +145,35 @@ void Roulette::evenOdd(double bet, Player &player, const number winningSlot) {
             double prize=calculatePrize(bet,2.0);
             player.setBalance(player.getBalance()+prize);
             std::cout<<"Correct ! YOU WON $"<<prize<<"\n";
-        } else std::cout<<"Wrong parity !You lost! \n";}
+            log.addEvvent({game, bet, prize});
+        } else {
+            std::cout<<"Wrong parity !You lost! \n";
+            log.addEvvent({game, bet, 0.0});
+        }
+    }
         else if (choice==  2) {
             if (!isEven) {
                 double prize=calculatePrize(bet,2.0);
                 player.setBalance(player.getBalance()+prize);
                 std::cout<<"Correct ! YOU WON $"<<prize<<"\n";
-            } else std::cout<<"Wrong parity !You lost! \n";}
+                log.addEvvent({game, bet, prize});
+            } else {
+                std::cout<<"Wrong parity !You lost! \n";
+                log.addEvvent({game, bet, 0.0});
+            }
+        }
 }
 
-void Roulette::betType(int choice, double bet, Player &player, const number winningSlot) {
+void Roulette::betType(int choice, double bet, Player &player, const number winningSlot,CasinoHistory<Transaction>& log) {
     if (choice==1)
-        numberBet(bet,player,winningSlot);
+        numberBet(bet,player,winningSlot,log);
     else if (choice==2)
-        color(bet,player,winningSlot);
+        color(bet,player,winningSlot,log);
     else if (choice==3)
-        evenOdd(bet,player,winningSlot);
+        evenOdd(bet,player,winningSlot,log);
 }
 
-void Roulette::play(Player& player) {
+void Roulette::play(Player& player,CasinoHistory<Transaction>& log) {
     std::cout << "\n=========================================\n";
     std::cout << "          WELCOME TO ROULETTE          \n";
     std::cout << "=========================================\n";
@@ -175,7 +190,7 @@ void Roulette::play(Player& player) {
         std::cout<<"Enter 1,2 or 3\n";
     }
     number winningSlot=spinWheel();
-    betType(choice,bet,player,winningSlot);
+    betType(choice,bet,player,winningSlot,log);
 }
 
 void Roulette::printRules() const {

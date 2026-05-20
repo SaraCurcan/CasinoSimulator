@@ -63,7 +63,7 @@ double Slots::multiply(const std::string& symbol) const {
     if (symbol=="CHERRY" || symbol=="LEMON") return 3.0;
     return 0.0;
 }
-void Slots::play(Player& player) {
+void Slots::play(Player& player, CasinoHistory<Transaction>& log) {
     std::cout<<"===== SPINNING THE REELS IN "<<getName()<<" =====\n";
     double bet=handleBetting(player);
     std::vector<std::vector<std::string>> actualScreen=screen();
@@ -78,9 +78,11 @@ void Slots::play(Player& player) {
         player.setBalance(player.getBalance()+prize);
         std::cout << "🎉 WINNER! Matching line of [" << winningSymbols << "]!\n";
         std::cout << "💰 You won: $" << prize << "\n";
+        log.addEvvent({game, bet, prize});
     }
     else {
         std::cout<<"❌. No match. Better luck next time!\n";
+        log.addEvvent({game, bet, 0.0});
     }
 }
 
