@@ -6,9 +6,10 @@ class Player {
 private:
     std::string name;
     double balance;
+    int age;
 public:
     Player();
-    Player(std::string name, double initialBalance);
+    Player(std::string name, double initialBalance, int age=0);
     Player(const Player& obj);
     Player& operator=(const Player& obj);
     ~Player();
@@ -16,7 +17,8 @@ public:
     void setName(const std::string& name);
     double getBalance() const;
     void setBalance(double balance);
-
+    int getAge() const;
+    void setAge(int age);
     template <typename T>
     void placeBet(T amount, double bet) {
         if (amount<=0) {
