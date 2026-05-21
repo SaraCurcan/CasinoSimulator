@@ -53,7 +53,7 @@ double Game::handleBetting(Player &player) {
         player.placeBet(bet,minBet);
         break;
     } catch (const std::runtime_error& e) {
-        std::cout<<"WARNING "<<e.what()<<" You only have $ "<<player.getBalance()<<" . Try again \n";
+        std::cout<<"WARNING "<<e.what()<<" You have $ "<<player.getBalance()<<" . Try again \n";
     }
     }
     return bet;

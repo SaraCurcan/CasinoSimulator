@@ -6,6 +6,11 @@
 #include<fstream>
 #include<limits>
 Slots::Slots():Game("Slots",1.0), rows(3),columns(3) {
+    std::ifstream file("slots_config.txt");
+    if (file.is_open()) {
+        file>>minBet>>rows>>columns;
+        file.close();
+    }
     symbols={"CHERRY","LEMON","ORANGE","PLUM","BAR","777"};
 }
 Slots::Slots(std::string game, double bet, int rows, int columns):

@@ -6,6 +6,11 @@
 #include <limits>
 
 Roulette::Roulette():Game("Roulette", 10.0) {
+    std::ifstream file("slots_config.txt");
+    if (file.is_open()) {
+        file>>minBet;
+        file.close();
+    }
     wheel.resize(37);
     wheel[0]={0,"Green"};
     for (int i=1;i<=36;++i) {

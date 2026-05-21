@@ -6,6 +6,11 @@
 #include<limits>
 #include<fstream>
 Blackjack::Blackjack() : Game("Blackjack", 5.0) {
+    std::ifstream file("Blk_config.txt");
+    if (file.is_open()) {
+        file>>minBet;
+        file.close();
+    }
     initializeDeck();
 }
 Blackjack::Blackjack(std::string game, double bet) : Game(game, bet) {
@@ -144,7 +149,7 @@ void Blackjack::play(Player &player,CasinoHistory<Transaction>& log) {
 void Blackjack::printRules() const {
     std::ifstream file("BlackjackRules.txt");
     if (!file.is_open()) {
-        std::cout<<"Welcome to BLackjack! Try your bedt to win\n";
+        std::cout<<"Welcome to BLackjack! Try your best to win\n";
         return;
     }
     std::string line;

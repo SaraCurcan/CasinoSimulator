@@ -2,6 +2,7 @@
 #include <string>
 #include<iostream>
 #include<stdexcept>
+#include <type_traits>
 class Player {
 private:
     std::string name;
@@ -21,6 +22,7 @@ public:
     void setAge(int age);
     template <typename T>
     void placeBet(T amount, double bet) {
+        static_assert(std::is_arithmetic<T>::value, "Bet amount must be a number!\n");
         if (amount<=0) {
             throw std::runtime_error("Bet amount must be positive\n");
         }

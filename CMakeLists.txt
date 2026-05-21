@@ -17,5 +17,4 @@ add_executable(Casino
         Roulette.h
         Roulette.cpp
         CasinoHistory.h
-        Casino.cpp
 )
