@@ -6,7 +6,7 @@
 #include <limits>
 
 Roulette::Roulette():Game("Roulette", 10.0) {
-    std::ifstream file("slots_config.txt");
+    std::ifstream file("roulette_config.txt");
     if (file.is_open()) {
         file>>minBet;
         file.close();
@@ -89,10 +89,10 @@ void Roulette::numberBet(double bet, Player &player, const number winningSlot,Ca
         double prize=calculatePrize(bet,35.0);
         player.setBalance(player.getBalance()+prize);
         std::cout<<"HIT ! YOU WON $"<<prize<<"\n";
-        log.addEvvent({game, bet, prize});
+        log.addEvent({game, bet, prize});
     }else {
         std::cout<<"LOSER ! BETTER LUCK NEXT TIME\n";
-        log.addEvvent({game, bet, 0.0});
+        log.addEvent({game, bet, 0.0});
     }
 }
 
@@ -118,10 +118,10 @@ void Roulette::color(double bet, Player &player, const number winningSlot,Casino
         double prize=calculatePrize(bet,2.0);
         player.setBalance(player.getBalance()+prize);
         std::cout<<"Correct ! YOU WON $"<<prize<<"\n";
-        log.addEvvent({game, bet, prize});
+        log.addEvent({game, bet, prize});
     }else {
         std::cout<<"Wrong color!You lost!\n";
-        log.addEvvent({game, bet, 0.0});
+        log.addEvent({game, bet, 0.0});
     }
 }
 
@@ -141,7 +141,7 @@ void Roulette::evenOdd(double bet, Player &player, const number winningSlot,Casi
     std::cout<<"The ball landed on: "<<winningSlot.color<<" "<<winningSlot.value<<"\n";
     if (winningSlot.value==0) {
         std::cout<<"0 !!!. Houes wins\n";
-        log.addEvvent({game, bet, 0.0});
+        log.addEvent({game, bet, 0.0});
         return;
     }
     bool isEven=(winningSlot.value%2==0);
@@ -150,10 +150,10 @@ void Roulette::evenOdd(double bet, Player &player, const number winningSlot,Casi
             double prize=calculatePrize(bet,2.0);
             player.setBalance(player.getBalance()+prize);
             std::cout<<"Correct ! YOU WON $"<<prize<<"\n";
-            log.addEvvent({game, bet, prize});
+            log.addEvent({game, bet, prize});
         } else {
             std::cout<<"Wrong parity !You lost! \n";
-            log.addEvvent({game, bet, 0.0});
+            log.addEvent({game, bet, 0.0});
         }
     }
         else if (choice==  2) {
@@ -161,10 +161,10 @@ void Roulette::evenOdd(double bet, Player &player, const number winningSlot,Casi
                 double prize=calculatePrize(bet,2.0);
                 player.setBalance(player.getBalance()+prize);
                 std::cout<<"Correct ! YOU WON $"<<prize<<"\n";
-                log.addEvvent({game, bet, prize});
+                log.addEvent({game, bet, prize});
             } else {
                 std::cout<<"Wrong parity !You lost! \n";
-                log.addEvvent({game, bet, 0.0});
+                log.addEvent({game, bet, 0.0});
             }
         }
 }
@@ -183,7 +183,7 @@ void Roulette::play(Player& player,CasinoHistory<Transaction>& log) {
     std::cout << "          WELCOME TO ROULETTE          \n";
     std::cout << "=========================================\n";
     double bet=handleBetting(player);
-    std::cout<<"Choose bet type: \n 1.EXACT NUMBER \n 2.CCOLOR (Red/Black) \n 3. EVEN/ODD\n";
+    std::cout<<"Choose bet type: \n 1.EXACT NUMBER \n 2.COLOR (Red/Black) \n 3. EVEN/ODD\n";
     std::string input;
     int choice=0;
     while (true) {

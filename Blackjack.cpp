@@ -105,16 +105,16 @@ void Blackjack::winner(Player &player, double bet, int playerTotal, int dealerTo
         double prize=calculatePrize(bet,2.0);
         player.setBalance(player.getBalance() + prize);
         std::cout<<"You won $"<<prize<<"\n";
-        log.addEvvent({game,bet,prize});
+        log.addEvent({game,bet,prize});
     }
     else if (playerTotal<dealerTotal) {
         std::cout<<"You lost! Better luck next time!\n";
-        log.addEvvent({game,bet,0.0});
+        log.addEvent({game,bet,0.0});
     }
     else {
         player.setBalance(player.getBalance() + bet);
         std::cout << "It's a Push! Your bet of $" << bet << " was returned.\n";
-        log.addEvvent({game,bet,bet});
+        log.addEvent({game,bet,bet});
     }
 }
 
@@ -133,7 +133,7 @@ void Blackjack::play(Player &player,CasinoHistory<Transaction>& log) {
     int playerTotal=handValue(playerHand);
     if (playerTotal>21) {
         std::cout << "\n❌ Bust! You went over 21. Dealer wins!\n";
-        log.addEvvent({game,bet,0.0});
+        log.addEvent({game,bet,0.0});
         return;
     }
     std::cout<<"Dealer's turn\n";

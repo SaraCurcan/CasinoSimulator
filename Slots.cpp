@@ -83,11 +83,11 @@ void Slots::play(Player& player, CasinoHistory<Transaction>& log) {
         player.setBalance(player.getBalance()+prize);
         std::cout << "🎉 WINNER! Matching line of [" << winningSymbols << "]!\n";
         std::cout << "💰 You won: $" << prize << "\n";
-        log.addEvvent({game, bet, prize});
+        log.addEvent({game, bet, prize});
     }
     else {
         std::cout<<"❌. No match. Better luck next time!\n";
-        log.addEvvent({game, bet, 0.0});
+        log.addEvent({game, bet, 0.0});
     }
 }
 

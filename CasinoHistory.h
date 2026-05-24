@@ -31,8 +31,8 @@ public:
     }
 
     ~CasinoHistory()=default;
-    void addEvvent(const T& evvent) {
-        data.push_back(evvent);
+    void addEvent(const T& event) {
+        data.push_back(event);
     }
     void SaveProgress(const std::string& filename) const {
         std::ofstream file(filename);
@@ -40,8 +40,8 @@ public:
             std::cerr<<"Error at file openning\n";
             return;
         }
-        for (const auto& evvent:data) {
-            file<<evvent<<"\n";
+        for (const auto& event:data) {
+            file<<event<<"\n";
         }
         file.close();
     }
